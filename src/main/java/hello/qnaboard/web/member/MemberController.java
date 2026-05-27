@@ -19,12 +19,12 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("/signup")
-    public String signupForm(@ModelAttribute("member") Member member) {
+    public String addForm(@ModelAttribute("member") Member member) {
         return "members/signup";
     }
 
     @PostMapping("/signup")
-    public String signup(@Valid @ModelAttribute("member") Member member, BindingResult bindingResult) {
+    public String saveMember(@Valid @ModelAttribute("member") Member member, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "members/signup";

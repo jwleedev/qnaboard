@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hello.qnaboard.domain.post.PostMapper">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="postId">
+        INSERT into post (member_id, title, content)
+        VALUES (#{memberId}, #{title}, #{content})
+    </insert>
+
+    <select id="findById" resultType="PostDetailDto">
+        SELECT
+            p.post_id,
+            p.title,
+            p.content,
+            p.view_count,
+            p.created_at,
+            m.member_id,
+            m.name
+        FROM post p
+        JOIN member m ON p.member_id = m.member_id
+        WHERE p.post_id = #{postId}
+    </select>
+
+    <update id="updateViewCount">
+        UPDATE post
+        SET view_count = view_count + 1
+        WHERE post_id = #{postId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM post
+        WHERE post_id = #{postId}
+    </delete>
+
+    <update id="updatePost">
+        UPDATE post
+        SET title = #{title},
+        content = #{content}
+        WHERE post_id = #{postId}
+    </update>
+</mapper>

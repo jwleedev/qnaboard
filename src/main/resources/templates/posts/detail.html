@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A 게시글 상세 - Q&A 게시판</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="board-container">
+        <div class="detail-header">
+            <h2 class="detail-title mb-3" th:text="${post.title}">제목</h2>
+
+            <div class="d-flex justify-content-end detail-info align-items-center">
+                <span class="fw-medium text-dark" th:text="${post.name}">이름</span>
+                <span class="mx-2 text-muted">|</span>
+
+                <span>조회수 : <span th:text="${post.viewCount}">0</span></span>
+                <span class="mx-2 text-muted">|</span>
+
+                <span th:text="${#temporals.format(post.createdAt, 'yyyy. MM. dd HH:mm')}">2026. 05. 10 오후 4:27:55</span>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="detail-content" th:text="${post.content}" style="white-space: pre-wrap;">
+        </div>
+
+        <!-- Comments Section -->
+        <div class="comment-section">
+            <!-- Write Comment -->
+            <div class="comment-write-box">
+                <div class="comment-meta">
+                </div>
+                <form action="/comment/write" method="post" class="d-flex align-items-stretch">
+                    <!-- 타임리프: 로그인한 사용자 이름 바인딩 -->
+                    <div class="me-3 fw-bold d-flex align-items-center justify-content-center" style="width: 100px;">이지우</div>
+                    <textarea class="form-control me-3" rows="3" placeholder="댓글을 입력해주세요." style="resize: none;"></textarea>
+                    <button type="submit" class="btn btn-custom-unified" style="width: 100px; font-weight: 500; padding: 0;">등록</button>
+                </form>
+            </div>
+
+            <!-- Comment List -->
+            <div class="comment-list mt-4">
+                <!-- Example 1: My comment (has delete button) -->
+                <div class="comment-item">
+                    <div class="comment-author text-dark">이지우</div>
+                    <div class="comment-text text-dark">이것은 내가 작성한 댓글의 예시입니다. 삭제 버튼이 보입니다.</div>
+                    <div class="comment-actions">
+                        <!-- 타임리프: 본인 댓글일 경우에만 표시 -->
+                        <button type="button" class="btn btn-sm btn-outline-danger border-0">삭제</button>
+                    </div>
+                </div>
+
+                <!-- Example 2: Other's comment -->
+                <div class="comment-item">
+                    <div class="comment-author text-dark">관리자</div>
+                    <div class="comment-text text-dark">해당 문제는 시스템 오류로 파악되어 현재 수정 중입니다. 불편을 드려 죄송합니다.</div>
+                    <div class="comment-actions">
+                        <!-- 타인 댓글은 삭제 버튼 없음 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Buttons -->
+        <div class="d-flex justify-content-end mt-4">
+            <th:block th:if="${session.loginMember != null and session.loginMember.memberId == post.memberId}">
+                <a th:href="@{|/posts/${post.postId}/edit|}" class="btn btn-outline-secondary me-2" style="width: 100px; border-radius: 0;">수정</a>
+
+                <form th:action="@{|/posts/${post.postId}/delete|}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-outline-danger me-2" style="width: 100px; border-radius: 0;">삭제</button>
+                </form>
+            </th:block>
+
+            <a th:href="@{/posts}" class="btn btn-custom-unified" style="width: 100px;">목록</a>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
