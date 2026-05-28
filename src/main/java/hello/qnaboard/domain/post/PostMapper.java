@@ -20,7 +20,7 @@ public interface PostMapper {
 
     void delete(Long postId);
 
-    List<PostDetailDto> findAll(PageRequest pageRequest);
+    List<PostDetailDto> findAll(PageRequest pageRequest, PostSearchCond cond);
 
     int countAll();
 }

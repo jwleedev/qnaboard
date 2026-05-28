@@ -49,8 +49,20 @@
             m.name
         FROM post p
         JOIN member m ON p.member_id = m.member_id
+        <where>
+            <if test="cond.type == 'name' and cond.keyword != null and cond.keyword !=''">
+                and m.name like concat('%', #{cond.keyword}, '%')
+            </if>
+            <if test="cond.type == 'title' and cond.keyword != null and cond.keyword !=''">
+                and p.title like concat('%', #{cond.keyword}, '%')
+            </if>
+            <if test="cond.type == 'all' and cond.keyword != null and cond.keyword !=''">
+                and (p.title like concat('%', #{cond.keyword}, '%')
+                or m.name like concat('%', #{cond.keyword}, '%'))
+            </if>
+        </where>
         ORDER BY post_id DESC
-        LIMIT #{size} OFFSET #{offset}
+        LIMIT #{pageRequest.size} OFFSET #{pageRequest.offset}
     </select>
 
     <select id="countAll" resultType="int">

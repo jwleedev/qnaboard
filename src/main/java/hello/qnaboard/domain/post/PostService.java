@@ -35,8 +35,8 @@ public class PostService {
         postMapper.delete(postId);
     }
 
-    public List<PostDetailDto> findAll(PageRequest pageRequest) {
-       return postMapper.findAll(pageRequest);
+    public List<PostDetailDto> findAll(PageRequest pageRequest, PostSearchCond cond) {
+       return postMapper.findAll(pageRequest, cond);
     }
 
     public int countAll() {

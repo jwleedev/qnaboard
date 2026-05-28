@@ -5,10 +5,7 @@ import hello.qnaboard.domain.comment.CommentService;
 import hello.qnaboard.domain.common.Pagination;
 import hello.qnaboard.domain.common.PageRequest;
 import hello.qnaboard.domain.member.Member;
-import hello.qnaboard.domain.post.Post;
-import hello.qnaboard.domain.post.PostDetailDto;
-import hello.qnaboard.domain.post.PostService;
-import hello.qnaboard.domain.post.PostUpdateDto;
+import hello.qnaboard.domain.post.*;
 import hello.qnaboard.web.login.SessionConst;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,6 +31,7 @@ public class PostController {
 
     @GetMapping
     public String list(@ModelAttribute PageRequest pageRequest,
+                       @ModelAttribute("cond") PostSearchCond cond,
                        @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
                        Model model) {
 
@@ -41,7 +39,7 @@ public class PostController {
             model.addAttribute("member", loginMember);
         }
 
-        List<PostDetailDto> posts = postService.findAll(pageRequest);
+        List<PostDetailDto> posts = postService.findAll(pageRequest, cond);
         int totalPostCount = postService.countAll();
         Pagination pagination = new Pagination(totalPostCount, pageRequest);
 
