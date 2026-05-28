@@ -39,4 +39,21 @@
         content = #{content}
         WHERE post_id = #{postId}
     </update>
+
+    <select id="findAll" resultType="PostDetailDto">
+        SELECT
+            p.post_id,
+            p.title,
+            p.created_at,
+            p.view_count,
+            m.name
+        FROM post p
+        JOIN member m ON p.member_id = m.member_id
+        ORDER BY post_id DESC
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*) FROM post
+    </select>
 </mapper>

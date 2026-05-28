@@ -1,5 +1,9 @@
 package hello.qnaboard.web.post;
 
+import hello.qnaboard.domain.comment.CommentResponseDto;
+import hello.qnaboard.domain.comment.CommentService;
+import hello.qnaboard.domain.common.Pagination;
+import hello.qnaboard.domain.common.PageRequest;
 import hello.qnaboard.domain.member.Member;
 import hello.qnaboard.domain.post.Post;
 import hello.qnaboard.domain.post.PostDetailDto;
@@ -17,6 +21,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/posts")
 @RequiredArgsConstructor
@@ -24,14 +30,23 @@ public class PostController {
 
     private final PostService postService;
 
+    private final CommentService commentService;
+
     @GetMapping
-    public String list(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
+    public String list(@ModelAttribute PageRequest pageRequest,
+                       @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
                        Model model) {
 
         if (loginMember != null) {
             model.addAttribute("member", loginMember);
         }
 
+        List<PostDetailDto> posts = postService.findAll(pageRequest);
+        int totalPostCount = postService.countAll();
+        Pagination pagination = new Pagination(totalPostCount, pageRequest);
+
+        model.addAttribute("posts", posts);
+        model.addAttribute("pagination", pagination);
         return "posts/list";
     }
 
@@ -44,6 +59,7 @@ public class PostController {
     public String savePost(@Validated @ModelAttribute("post") PostSaveForm form,
                            BindingResult bindingResult,
                            @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+
         if (bindingResult.hasErrors()) {
             return "posts/write";
         }
@@ -95,7 +111,10 @@ public class PostController {
         PostDetailDto postDetail = postService.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
 
+        List<CommentResponseDto> comments = commentService.findAllByPostId(postId);
+
         model.addAttribute("post", postDetail);
+        model.addAttribute("comments", comments);
 
         return "posts/detail";
     }

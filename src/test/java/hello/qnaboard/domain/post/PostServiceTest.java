@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
@@ -85,5 +86,21 @@ class PostServiceTest {
 
         Optional<PostDetailDto> findPost = postService.findById(savedPost.getPostId());
         Assertions.assertThat(findPost).isEmpty();
+    }
+
+    @Test
+    void findAll() {
+        Member member1 = new Member("jjd@naver.com", "jjd", "testgood!");
+        memberService.save(member1);
+        Post post1 = new Post(member1.getMemberId(), "jjd의 테스트 제목입니다.", "jjd의 테스트 내용입니다.");
+        postService.save(post1);
+
+        Member member2 = new Member("jjw@naver.com", "jjw", "testgood!");
+        memberService.save(member2);
+        Post post2 = new Post(member2.getMemberId(), "jjw의 테스트 제목입니다.", "jjw의 테스트 내용입니다.");
+        postService.save(post2);
+
+        List<PostDetailDto> list = postService.findAll();
+        Assertions.assertThat(list.size()).isEqualTo(2);
     }
 }

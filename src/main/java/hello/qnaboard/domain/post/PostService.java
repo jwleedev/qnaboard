@@ -1,9 +1,11 @@
 package hello.qnaboard.domain.post;
 
+import hello.qnaboard.domain.common.PageRequest;
 import hello.qnaboard.web.post.PostUpdateForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,5 +33,13 @@ public class PostService {
 
     public void delete(Long postId) {
         postMapper.delete(postId);
+    }
+
+    public List<PostDetailDto> findAll(PageRequest pageRequest) {
+       return postMapper.findAll(pageRequest);
+    }
+
+    public int countAll() {
+        return postMapper.countAll();
     }
 }
