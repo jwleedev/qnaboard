@@ -128,19 +128,23 @@ public class PostController {
         if (loginMember == null || !post.getMemberId().equals(loginMember.getMemberId()))
             return "redirect:/";
 
-        model.addAttribute("post", post);
+        PostUpdateForm form = new PostUpdateForm();
+        form.setTitle(post.getTitle());
+        form.setContent(post.getContent());
+
+        model.addAttribute("post", form);
         return "posts/write";
     }
 
     @PostMapping("/{postId}/edit")
     public String editPost(@PathVariable("postId") Long postId,
-                           @Valid @ModelAttribute PostUpdateForm form,
+                           @Valid @ModelAttribute("post") PostUpdateForm form,
                            BindingResult bindingResult,
                            @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
                            Model model)
     {
         if (bindingResult.hasErrors()) {
-            return "posts/{postId}/edit";
+            return "posts/write";
         }
 
         PostDetailDto post = postService.findById(postId)
