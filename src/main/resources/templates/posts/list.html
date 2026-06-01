@@ -14,11 +14,19 @@
 <body>
 <div class="board-container">
     <!-- Top Navigation Area -->
-    <div class="d-flex justify-content-end mb-4">
+    <div class="d-flex justify-content-end mb-4 align-items-center">
         <a th:if="${member == null}" href="/login" class="text-dark fw-bold text-decoration-none">로그인</a>
-        <form th:if="${member != null}" action="/logout" method="post" class="m-0 p-0">
-            <button type="submit" class="btn btn-link text-dark fw-bold text-decoration-none p-0 border-0">로그아웃</button>
-        </form>
+
+        <div th:if="${member != null}" class="d-flex align-items-center gap-3">
+            <div>
+                <span class="text-dark fw-bold">사용자 </span>
+                <span th:text="${member.name}">이름</span>
+            </div>
+
+            <form action="/logout" method="post" class="m-0 p-0">
+                <button type="submit" class="btn btn-link text-dark fw-bold text-decoration-none p-0 border-0">로그아웃</button>
+            </form>
+        </div>
     </div>
 
     <div class="board-header flex-column flex-md-row align-items-start align-items-md-end">
