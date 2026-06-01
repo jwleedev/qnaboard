@@ -88,7 +88,7 @@
 
             <li class="page-item" th:classappend="${!pagination.existPrevPage} ? 'disabled'">
                 <a class="page-link border-0 text-dark"
-                   th:href="@{/(page=${pagination.startPage - 1})}"
+                   th:href="@{/posts(page=${pagination.startPage - 1}, type=${cond.type}, keyword=${cond.keyword})}"
                    tabindex="-1">
                     <i class="bi bi-chevron-left"></i>
                 </a>
@@ -99,14 +99,14 @@
                 th:classappend="${pageRequest.page == num} ? 'active'">
                 <a class="page-link border-0"
                    th:classappend="${pageRequest.page == num} ? 'bg-dark border-dark text-white' : 'text-dark'"
-                   th:href="@{/posts(page=${num})}"
+                   th:href="@{/posts(page=${num}, type=${cond.type}, keyword=${cond.keyword})}"
                    th:text="${num}">
                 </a>
             </li>
 
             <li class="page-item" th:classappend="${!pagination.existNextPage} ? 'disabled'">
                 <a class="page-link border-0 text-dark"
-                   th:href="@{/posts(page=${pagination.endPage + 1})}">
+                   th:href="@{/posts(page=${pagination.endPage + 1}, type=${cond.type}, keyword=${cond.keyword})}">
                     <i class="bi bi-chevron-right"></i>
                 </a>
             </li>
