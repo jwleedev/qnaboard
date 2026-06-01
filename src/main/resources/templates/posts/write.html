@@ -44,7 +44,10 @@
 
             <div class="d-flex justify-content-end mt-4">
                 <button type="submit" class="btn btn-custom-unified me-2" style="width: 100px;">저장</button>
-                <a th:href="@{/posts}" class="btn btn-custom-unified" style="width: 100px;">취소</a>
+                <a th:if="${postId == null}" th:href="@{/posts}"
+                   class="btn btn-custom-unified" style="width: 100px;">취소</a>
+                <a th:if="${postId != null}" th:href="@{|/posts/${postId}|}"
+                   class="btn btn-custom-unified" style="width: 100px;">취소</a>
             </div>
         </form>
     </div>

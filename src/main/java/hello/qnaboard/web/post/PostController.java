@@ -133,6 +133,7 @@ public class PostController {
         form.setContent(post.getContent());
 
         model.addAttribute("post", form);
+        model.addAttribute("postId", postId);
         return "posts/write";
     }
 
@@ -144,6 +145,7 @@ public class PostController {
                            Model model)
     {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("postId", postId);
             return "posts/write";
         }
 
