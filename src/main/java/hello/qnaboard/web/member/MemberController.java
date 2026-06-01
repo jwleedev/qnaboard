@@ -30,7 +30,13 @@ public class MemberController {
             return "members/signup";
         }
 
-        memberService.save(member);
+        try {
+            memberService.save(member);
+        } catch (IllegalStateException e) {
+            bindingResult.rejectValue("email", "duplicate");
+            return "members/signup";
+        }
+
         return "redirect:/posts";
     }
 }

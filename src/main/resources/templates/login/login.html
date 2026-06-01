@@ -14,23 +14,29 @@
         <div class="auth-form-wrapper">
             <h1 class="auth-title">Login</h1>
             
-            <form action="/login" method="post">
+            <form action="/login" th:object="${loginForm}" method="post">
+
+                <div th:if="${#fields.globalErrors()}">
+                    <p class="field-error" th:each="err : ${#fields.globalErrors()}"
+                       th:text="${err}">전체 오류 메시지</p>
+                </div>
+
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                    <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Enter your email" required
+                           th:errorclass="field-error">
+                    <div class="field-error" th:errors="*{email}"></div>
                 </div>
                 
                 <div class="mb-4">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    <input type="password" class="form-control" id="password" th:field="*{password}"  placeholder="Password" required
+                           th:errorclass="field-error">
+                    <div class="field-error" th:errors="*{password}"></div>
                 </div>
                 
                 <div class="d-grid gap-2 mb-3">
                     <button type="submit" class="btn btn-custom-unified">Sign in</button>
-                </div>
-                
-                <div class="text-center">
-                    <a href="/forgot-password" class="text-muted" style="font-size: 0.9rem;">Forgot password?</a>
                 </div>
             </form>
             

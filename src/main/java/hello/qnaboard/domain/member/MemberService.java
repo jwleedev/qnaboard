@@ -16,6 +16,7 @@ public class MemberService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     public Member save(Member member) {
+        validateDuplicateMember(member);
 
         String rawPassword = member.getPassword();
         String encodedPassword = passwordEncoder.encode(rawPassword);
@@ -33,5 +34,12 @@ public class MemberService {
 
     public List<Member> findAll() {
         return memberRepository.findAll();
+    }
+
+    private void validateDuplicateMember(Member member) {
+        memberRepository.findByLoginId(member.getEmail())
+                .ifPresent(m -> {
+                    throw new IllegalStateException("이미 존재하는 회원입니다.");
+                });
     }
 }

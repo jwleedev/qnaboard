@@ -202,3 +202,9 @@ a {
     border: 1px solid #ccc;
     padding: 1rem;
 }
+.field-error {
+    color: #dc143c;         /* 선홍색 텍스트 */
+    border-color: #dc143c;  /* 입력창 테두리 색상 (th:errorclass가 input에 적용될 때) */
+    font-size: 14px;
+    margin-top: 5px;
+}
