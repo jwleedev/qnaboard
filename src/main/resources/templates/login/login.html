@@ -14,7 +14,7 @@
         <div class="auth-form-wrapper">
             <h1 class="auth-title">Login</h1>
             
-            <form action="/login" th:object="${loginForm}" method="post">
+            <form th:action th:object="${loginForm}" method="post">
 
                 <div th:if="${#fields.globalErrors()}">
                     <p class="field-error" th:each="err : ${#fields.globalErrors()}"
