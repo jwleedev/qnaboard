@@ -128,7 +128,7 @@ public class PostController {
 
         if (loginMember == null || !post.getMemberId().equals(loginMember.getMemberId())) {
             redirectAttributes.addFlashAttribute("errorMessage", "해당 게시글의 수정 권한이 없습니다.");
-            return "redirect:/posts";
+            return "redirect:/posts/" + postId;
         }
 
         PostUpdateForm form = new PostUpdateForm();
@@ -158,7 +158,7 @@ public class PostController {
 
         if (loginMember == null || !post.getMemberId().equals(loginMember.getMemberId())) {
             redirectAttributes.addFlashAttribute("errorMessage", "해당 게시글의 수정 권한이 없습니다.");
-            return "redirect:/posts";
+            return "redirect:/posts/" + postId;
         }
 
         PostUpdateDto updateDto = new PostUpdateDto();
@@ -182,7 +182,7 @@ public class PostController {
         // 권한이 없는 사람이 URL로 직접 삭제를 시도한 경우 메인 페이지로 보내기
         if (loginMember == null || !post.getMemberId().equals(loginMember.getMemberId())) {
             redirectAttributes.addFlashAttribute("errorMessage", "해당 게시글의 삭제 권한이 없습니다.");
-            return "redirect:/posts";
+            return "redirect:/posts/" + postId;
         }
 
         postService.delete(postId);

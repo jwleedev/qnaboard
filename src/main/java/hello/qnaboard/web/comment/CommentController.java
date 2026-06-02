@@ -47,7 +47,7 @@ public class CommentController {
 
         if (loginMember == null || !comment.getMemberId().equals(loginMember.getMemberId())) {
             redirectAttributes.addFlashAttribute("errorMessage", "해당 댓글의 삭제 권한이 없습니다.");
-            return "redirect:/posts";
+            return "redirect:/posts/" + postId;
         }
 
         commentService.delete(commentId);
