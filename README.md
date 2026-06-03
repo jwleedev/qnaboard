@@ -41,7 +41,7 @@
 | Function | HTTP Method | URL | Return View/ Redirect |
 |---|---|---|---|
 | 메인 화면 조회 | `GET` | `/` | `/posts` (게시글 목록)으로 리다이렉트 |
-<br><br>
+
 
 **회원 관리 API (Member Controller)**
 
