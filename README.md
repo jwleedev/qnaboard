@@ -30,6 +30,26 @@
 * **댓글 작성 및 삭제**: 로그인 사용자 전용 기능으로, 본인이 작성한 댓글에만 삭제 권한 부여
 * **예외 피드백**: 권한이 없는 비정상적인 삭제 요청 발생 시, 서버에서 예외를 캐치하여 알림창(alert)으로 피드백을 제공하고 안전한 페이지로 리다이렉트
 
+<br>
+
+## 개발 환경
+
+### [Backend]
+* **IDE(통합개발 환경)**: IntelliJ IDEA Community
+* **개발 언어**: Java 25
+* **프레임워크**: Spring Boot 4.0.6
+* **Build**: Gradle
+* **Security**:Spring Security
+
+### [DataBase]
+* **DB**: MySQL 8.0.45, MySQL Workbench 8.0 CE 
+* **DB 접근 기술**: MyBatis
+
+### [Frontend]
+* **Template Engine**: Thymeleaf
+* **UI Framework**: Bootstrap
+* **Markup / Style**: HTML / CSS
+
 <br><br>
 
 ## 🏗️ 구조 및 설계
@@ -41,7 +61,7 @@
 | Function | HTTP Method | URL | Return View/ Redirect |
 |---|---|---|---|
 | 메인 화면 조회 | `GET` | `/` | `/posts` (게시글 목록)으로 리다이렉트 |
-<br><br>
+<br>
 
 **회원 관리 API (Member Controller)**
 
@@ -49,7 +69,7 @@
 |---|---|---|---|
 | 회원가입 폼 조회 | `GET` | `/signup` | `member/signup` (회원가입 뷰) |
 | 회원가입 | `POST` | `/signup` | **성공**: `redirect:/posts`<br>(가입 완료 후 게시글 목록으로 리다이렉트)<br><br>**실패**: `members/signup`<br>(검증 오류 또는 이메일 중복 시 폼 다시 반환) |
-<br><br>
+<br>
 
 **로그인 API (LoginController)**
 
@@ -58,7 +78,7 @@
 | 로그인 폼 조회 | `GET` | `/login` | **미로그인**: `login/login` (로그인 뷰)<br><br>**기로그인**: `redirect:/`<br>(이미 로그인된 상태면 메인으로 리다이렉트) |
 | 로그인 | `POST` | `/login` | **성공**: `redirect:{redirectURL}`<br>(이전 요청 경로로 리다이렉트)<br><br>**실패**: `login/login`<br>(검증 오류 또는 회원정보 불일치 시 폼 다시 반환) |
 | 로그아웃 | `POST` | `/logout` | `redirect:/` (세션 만료 처리 후 메인으로 리다이렉트) |
-<br><br>
+<br>
 
 **게시판 관련 API (PostController)**
 
@@ -71,7 +91,7 @@
 | 게시글 수정 폼 조회 | `GET` | `/posts/{postId}/edit` | **성공**: `posts/write` (게시글 수정 뷰)<br><br>**실패**: `redirect:/posts/{postId}`<br>(수정 권한 없을 시 게시글 상세로 리다이렉트) |
 | 게시글 수정 | `POST` | `/posts/{postId}/edit` | **성공**: `redirect:/posts/{postId}`<br>(게시글 상세로 리다이렉트)<br><br>**실패**: `posts/write`<br>(검증 오류 시 폼 다시 반환) |
 | 게시글 삭제 | `POST` | `/posts/{postId}/delete` | **성공**: `redirect:/` (메인 화면으로 리다이렉트)<br><br>**실패**: `redirect:/posts/{postId}`<br>(게시글 상세로 리다이렉트) |
-<br><br>
+<br>
 
 **댓글 API (CommentController)**
 
@@ -79,7 +99,7 @@
 |---|---|---|---|
 | 댓글 등록 | `POST` | `comments/add` | **성공**: `redirect:/posts/{postId}`<br>(댓글 작성한 게시글 상세로 리다이렉트)<br><br>**실패**: `redirect:/posts/{postId}`<br>(검증 오류 시 리다이렉트) |
 | 댓글 삭제 | `POST` | `comments/{commentId}/delete` | **성공**: `redirect:/posts/{postId}`<br>(해당 게시글 상세로 리다이렉트)<br><br>**실패**: `redirect:/posts/{postId}`<br>(댓글 삭제 권한이 없을 시 오류 메시지와 함께 해당 게시글 상세로 리다이렉트) |
-<br><br>
+<br>
 
 ### 2. DB 설계
 
@@ -94,7 +114,7 @@
 | `created_at` | `DATETIME` | DEFAULT CURRENT_TIMESTAMP<br>NOT NULL | 게시글 최초 작성일 |
 | `updated_at` | `DATETIME` | DEFAULT NOW() ON UPDATE NOW()<br>NOT NULL | 게시글 최종 수정일 |
 | `view_count` | `INT` | DEFAULT 0, NOT NULL | 게시글 조회수 |
-<br><br>
+<br>
 
 **Member**
 
@@ -105,7 +125,7 @@
 | `email` | `VARCHAR(100)` | NOT NULL, UNIQUE | 회원 이메일 |
 | `password` | `VARCHAR(255)` | NOT NULL | 비밀번호 |
 | `joind_date` | `DATETIME` | DEFAULT CURRENT_TIMESTAMP<br>NOT NULL | 회원가입 일시 |
-<br><br>
+<br>
 
 **Comment**
 
@@ -116,12 +136,12 @@
 | `member_id` | `INT` | FK, NOT NULL | 댓글 작성자 회원 고유 식별자 |
 | `content` | `TEXT` | NOT NULL | 댓글 내용 |
 | `created_at` | `DATETIME` | DEFAULT CURRENT_TIMESTAMP<br>NOT NULL | 댓글 최초 작성일 |
-<br><br>
+<br>
 
-### 실행 화면 (구현)
+## 실행 화면 (구현)
 
 <details>
-<summary><b>메인화면 사진 GIF</b></summary>
+<summary><b>메인화면 사진</b></summary>
 </details>
 
 <details>
@@ -144,7 +164,7 @@
 
 * MyBatis 동적 쿼리(`<if>`)를 활용한 다중 조건(제목, 작성자) 검색 및 최신 글(글 번호) 기준 정렬
 * 게시글 리스트 페이징 처리
-* 현재 페이지 번호 하이라이트 및 한계 페이지(처음/끝) 이동 버튼 비활성화
+* 현재 페이지 번호 하이라이트
 </details>
 
 <details>
