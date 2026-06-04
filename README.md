@@ -143,7 +143,7 @@
 <details>
 <summary><b>메인화면 사진</b></summary>
 
-![로그인로그아웃시연](./images/mainPage.png)
+![메인페이지사진](./images/mainPage.png)
 </details>
 
 <details>
@@ -157,6 +157,7 @@
 <details>
 <summary><b>회원가입 GIF</b></summary>
 
+![회원가입시연](./gifs/signup.gif)
 * `@Valid`를 이용한 회원가입 폼(Form) 검증
 * 입력 규칙 미준수 시 필드 에러(Field Error)를 화면에 표시하여 사용자 피드백 제공
 * 이메일 중복 가입 차단 및 에러 메시지(Object Error) 표시
@@ -165,6 +166,7 @@
 <details>
 <summary><b>게시판 검색 및 페이징 GIF</b></summary>
 
+![게시판검색및페이징시연](./gifs/searchPost.gif)
 * MyBatis 동적 쿼리(`<if>`)를 활용한 다중 조건(제목, 작성자) 검색 및 최신 글(글 번호) 기준 정렬
 * 게시글 리스트 페이징 처리
 * 현재 페이지 번호 하이라이트
@@ -173,6 +175,7 @@
 <details>
 <summary><b>게시글 작성 GIF</b></summary>
 
+![게시글작성시연](./gifs/savePost.gif)
 * Validator를 이용한 게시글저장(PostSaveForm) 폼 객체 검증
 * 입력 규칙 미준수 시 필드 에러(Field Error)를 화면에 표시하여 사용자 피드백 제공
 * 게시글 저장 성공 시 새로 등록된 글의 상세 페이지로 즉시 이동하는 PRG(Post-Redirect-Get) 패턴 적용으로 중복 등록 방지
@@ -182,6 +185,7 @@
 <details>
 <summary><b>게시글 상세 페이지 GIF</b></summary>
 
+![게시글상세페이지시연](./gifs/postDetail.gif)
 * 쿠키(Cookie)를 활용한 조회수 중복 증가 방지
 * **게시글 제어 및 화면 흐름**
   * 수정 버튼 클릭 시 수정 권한을 검증하여 작성자 본인만 수정 페이지로 이동
@@ -191,6 +195,7 @@
 <details>
 <summary><b>게시글 수정 GIF</b></summary>
 
+![게시글수정시연](./gifs/updatePost.gif)
 * Validator를 이용한 게시글수정폼 객체(PostUpdateForm)검증
 * 입력 규칙 미준수 시 필드 에러(Field Error)를 화면에 표시하여 사용자 피드백 제공
 * 게시글 수정 성공 시 수정된 글의 상세 페이지로 즉시 이동하는 PRG(Post-Redirect-Get) 패턴 적용으로 중복 등록 방지
@@ -200,6 +205,7 @@
 <details>
 <summary><b>게시글 수정 실패 GIF</b></summary>
 
+![게시글수정실패시연](./gifs/updatePostFail.gif)
 * 세션 스토리지의 사용자 객체와 DB의 작성자 식별자(ID)를 비교하는 인가(Authorization) 로직을 통해 안전한 수정 권한 체크
 * 게시글 수정 실패 시 에러 메시지를 띄운 후 해당 게시글의 상세 페이지로 이동
 </details>
@@ -207,6 +213,7 @@
 <details>
 <summary><b>게시글 삭제 GIF</b></summary>
 
+![게시글삭제시연](./gifs/deletePost.gif)
 * 세션 스토리지의 사용자 객체와 DB의 작성자 식별자(ID)를 비교하는 인가(Authorization) 로직을 통해 안전한 삭제 권한 체크
 * 게시글 삭제 실패 시 에러 메시지를 띄운 후 해당 게시글의 상세 페이지로 이동
 </details>
@@ -214,6 +221,7 @@
 <details>
 <summary><b>댓글 작성/삭제 GIF</b></summary>
 
+![댓글작성삭제시연](./gifs/comment.gif)
 * 로그인한 사용자만 댓글을 작성할 수 있도록 제한
 * 세션 스토리지의 사용자 객체와 DB의 작성자 식별자(ID)를 비교하는 인가(Authorization) 로직을 통해 안전한 삭제 권한 체크
 * 댓글 삭제 실패 시 에러 메시지를 띄운 후 해당 게시글의 상세 페이지로 이동
