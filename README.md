@@ -141,7 +141,7 @@
 ## 실행 화면 (구현)
 
 <details>
-<summary><b>메인화면 사진 GIF</b></summary>
+<summary><b>메인화면 사진</b></summary>
 </details>
 
 <details>
