@@ -30,6 +30,26 @@
 * **댓글 작성 및 삭제**: 로그인 사용자 전용 기능으로, 본인이 작성한 댓글에만 삭제 권한 부여
 * **예외 피드백**: 권한이 없는 비정상적인 삭제 요청 발생 시, 서버에서 예외를 캐치하여 알림창(alert)으로 피드백을 제공하고 안전한 페이지로 리다이렉트
 
+<br>
+
+## 개발 환경
+
+###[Backend]
+* **IDE(통합개발 환경)**: IntelliJ IDEA Community
+* **개발 언어**: Java 25
+* **프레임워크**: Spring Boot 4.0.6
+* **Build**: Gradle
+* **Security**:Spring Security
+
+###[DataBase]
+* **DB**: MySQL 8.0.45, MySQL Workbench 8.0 CE 
+* **DB 접근 기술**: MyBatis
+
+###[Frontend]
+* **Template Engine**: Thymeleaf
+* **UI Framework**: Bootstrap
+* **Markup / Style**: HTML / CSS
+
 <br><br>
 
 ## 🏗️ 구조 및 설계
