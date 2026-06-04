@@ -142,11 +142,14 @@
 
 <details>
 <summary><b>메인화면 사진</b></summary>
+
+![로그인로그아웃시연](./images/mainPage.png)
 </details>
 
 <details>
 <summary><b>로그인 로그아웃 GIF</b></summary>
 
+![로그인로그아웃시연](./gifs/loginlogout.gif)
 * Spring Security와 BCrypt 암호화를 적용한 안전한 로그인 처리
 * 로그인 실패 시 에러 메시지(Object Error)를 화면에 표시하여 사용자 피드백 제공
 </details>
