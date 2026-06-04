@@ -34,18 +34,18 @@
 
 ## 개발 환경
 
-###[Backend]
+### [Backend]
 * **IDE(통합개발 환경)**: IntelliJ IDEA Community
 * **개발 언어**: Java 25
 * **프레임워크**: Spring Boot 4.0.6
 * **Build**: Gradle
 * **Security**:Spring Security
 
-###[DataBase]
+### [DataBase]
 * **DB**: MySQL 8.0.45, MySQL Workbench 8.0 CE 
 * **DB 접근 기술**: MyBatis
 
-###[Frontend]
+### [Frontend]
 * **Template Engine**: Thymeleaf
 * **UI Framework**: Bootstrap
 * **Markup / Style**: HTML / CSS
