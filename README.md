@@ -54,16 +54,16 @@
 
 ## 구조 및 설계
 
-### 1. API 설계
+### 1. URI 및 라우팅 설계
 
-**메인 화면 API (HomeController)**
+**메인 화면 (HomeController)**
 
 | Function | HTTP Method | URL | Return View/ Redirect |
 |---|---|---|---|
 | 메인 화면 조회 | `GET` | `/` | `/posts` (게시글 목록)으로 리다이렉트 |
 <br>
 
-**회원 관리 API (Member Controller)**
+**회원 관리 (Member Controller)**
 
 | Function | HTTP Method | URL | Return View/ Redirect |
 |---|---|---|---|
@@ -71,7 +71,7 @@
 | 회원가입 | `POST` | `/signup` | **성공**: `redirect:/posts`<br>(가입 완료 후 게시글 목록으로 리다이렉트)<br><br>**실패**: `members/signup`<br>(검증 오류 또는 이메일 중복 시 폼 다시 반환) |
 <br>
 
-**로그인 API (LoginController)**
+**로그인 (LoginController)**
 
 | Function | HTTP Method | URL | Return View/ Redirect |
 |---|---|---|---|
@@ -80,7 +80,7 @@
 | 로그아웃 | `POST` | `/logout` | `redirect:/` (세션 만료 처리 후 메인으로 리다이렉트) |
 <br>
 
-**게시판 관련 API (PostController)**
+**게시판 관련 (PostController)**
 
 | Function | HTTP Method | URL | Return View/ Redirect |
 |---|---|---|---|
@@ -93,7 +93,7 @@
 | 게시글 삭제 | `POST` | `/posts/{postId}/delete` | **성공**: `redirect:/` (메인 화면으로 리다이렉트)<br><br>**실패**: `redirect:/posts/{postId}`<br>(게시글 상세로 리다이렉트) |
 <br>
 
-**댓글 API (CommentController)**
+**댓글 (CommentController)**
 
 | Function | HTTP Method | URL | Return View/ Redirect |
 |---|---|---|---|
